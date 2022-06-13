@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('auth.signin');
 });
+
+Route::get('/tiket', function () {
+    return view('tiket');
+});
