@@ -310,7 +310,7 @@
             <h4>beras sovia premium</h4>
             <h4>Rp.70.000</h4>
             <p>beras punel berkualitas enak dikit</p>              
-            <a href="#" class="btn btn-outline-danger">Buy</a>
+            <a href="#" class="btn btn-outline-danger">Detail</a>
           </div>
         </div>
       </div>
