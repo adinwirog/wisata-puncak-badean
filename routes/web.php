@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,10 @@ Route::get('/login', function () {
     return view('auth.signin');
 });
 
+Route::post('/login', function () {
+    return view('auth.signin');
+});
+
 Route::get('/tiket', function () {
     return view('tiket');
 });
@@ -29,9 +34,8 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 });
 
-Route::get('/post', function () {
-    return view('dashboard.post');
-});
+// Route::get('/post', [EventController::class, 'index'])->name('dashboard.post');
+Route::resource('post', EventController::class);
 
 Route::get('/postcreate', function () {
     return view('dashboard.postcreate');
