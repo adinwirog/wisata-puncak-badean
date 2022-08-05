@@ -84,7 +84,7 @@
           {data: 'file_name', name: 'file_name'},
           {data: 'title', name: 'title'},
           {data: 'contents', name: 'contents'},
-          {data: 'users', name: 'users.name'},
+          {data: 'users', name: 'users.name', 'searchable': false},
           {data: 'created_at', name: 'created_at'},
           {data: 'updated_at', name: 'updated_at'},
           {data: 'is_visible', name: 'is_visible'},
@@ -97,6 +97,7 @@
 //Show modal delete
   $(document).on('click', '.delete', function () {
       dataId = $(this).attr('id');
+      $('#idval').text(dataId);
       $('#modal-delete').modal('show');
   });
 

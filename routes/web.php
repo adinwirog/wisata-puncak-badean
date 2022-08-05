@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,17 +46,14 @@ Route::get('/postedit', function () {
     return view('dashboard.postedit');
 });
 
-Route::get('/products', function () {
-    return view('dashboard.products');
-});
+Route::resource('products', ProductsController::class);
 
-Route::get('/productscreate', function () {
-    return view('dashboard.productscreate');
-});
 
-Route::get('/productsedit', function () {
-    return view('dashboard.productsedit');
-});
+
+// Route::get('/productscreate', function () {
+//     return view('dashboard.productscreate');
+// });
+
 
 Route::get('/verifikasitiket', function () {
     return view('dashboard.verifikasitiket');
