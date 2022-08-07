@@ -20,7 +20,7 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link @yield('ticket')" href="#">
+        <a class="nav-link @yield('ticket')" href="{{ route('ticketting.index') }}">
             <span data-feather="users" class="align-text-bottom"></span>
             Ticketting manajemen
         </a>

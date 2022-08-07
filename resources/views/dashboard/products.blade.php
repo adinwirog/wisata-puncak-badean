@@ -15,7 +15,7 @@
     <div class="table-responsive">
         <table id="data-event" class="table table-striped align-middle table-sm">
           <thead>
-            <tr>
+            {{-- <tr>
               <th scope="col">#</th>
               <th scope="col">Gambar</th>
               <th scope="col">Nama Produk</th>
@@ -24,7 +24,7 @@
               <th scope="col">Dibuat</th>
               <th scope="col">Diupdate</th>
               <th scope="col">Action</th>
-            </tr>
+            </tr> --}}
           </thead>
           <tbody>
           </tbody>
@@ -55,8 +55,9 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
+  let tableProduct;
   $(document).ready( function () {
-    $("#data-event").DataTable({
+    tableProduct = $("#data-event").DataTable({
       responsive: true,
       processing: true,
       serverSide: true,
@@ -65,14 +66,14 @@
         type: "GET"
       },
       columns: [
-          {data: 'id', name: 'id'},
-          {data: 'file_name', name: 'file_name'},
-          {data: 'title', name: 'title'},
-          {data: 'price', name: 'price'},
-          {data: 'description', name: 'description'},
-          {data: 'created_at', name: 'created_at'},
-          {data: 'updated_at', name: 'updated_at'},
-          {data: 'action', name: 'action', 'searchable': false},
+          {data: 'id', name: 'id', title: '#'},
+          {data: 'file_name', name: 'file_name', title: 'Gambar'},
+          {data: 'title', name: 'title', title: 'Nama Produk'},
+          {data: 'price', name: 'price', title: 'Harga'},
+          {data: 'description', name: 'description', title: 'Deskripsi'},
+          {data: 'created_at', name: 'created_at', title: 'Dibuat'},
+          {data: 'updated_at', name: 'updated_at', title: 'Diubah'},
+          {data: 'action', name: 'action', 'searchable': false, title: 'Action'},
       ],
       // columnDefs:[{
       //   targets: [3],
@@ -86,8 +87,8 @@
 
   $(document).on('click', '.delete', function () {
       dataId = $(this).attr('id');
-      dataName = $(this).attr('name');
-      $('#namval').text(dataName);
+      data = tableProduct.row( $(this).closest('tr') ).data()
+      $('#namval').text(data.title);
       $('#modal-delete').modal('show');
   });
 
