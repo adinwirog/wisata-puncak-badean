@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Visitors extends Model
 {
     use HasFactory;
+
+    public function bookList() {
+        return $this->hasMany(BookList::class);
+    }
 }

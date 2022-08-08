@@ -19,16 +19,17 @@
         </ul>
       </div>
     </div> -->
-    <form>
+    <form action="{{ route('booking-tiket.store') }}" method="POST">
+      @csrf
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
+    </div> --}}
 
     <div class="form-row">
         <!-- <div class="form-group col-md-6">
@@ -37,17 +38,17 @@
         </div> -->
 
         <div class="form-group col-md-6">
-            <label for="inputState">Jenis Kendaraan</label>
-            <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+            <label for="tipe_kendaraan">Jenis Kendaraan</label>
+            <select id="tipe_kendaraan" name="tipe_kendaraan" class="form-control">
+              @foreach ($tipetiket as $item)
+                <option value="{{ $item->id }}">{{ $item->tipe_kendaraan }}</option>
+              @endforeach
             </select>
         </div>
 
-        <div class="form-group col-md-2">
-            <label for="inputZip">Jumlah penumpang</label>
-            <input type="text" class="form-control" id="inputZip" aria-describedby="penumpangHelp">
-            <small id="penumpangHelp" class="form-text text-muted">/Kendaraan</small>
+        <div class="form-group col-md-3">
+            <label for="datepicker">Tanggal Kadaluarsa Tiket</label>
+            <input type="text" name="kadaluarsa" class="form-control" id="datepicker" readonly="">
         </div>
 
     </div>
@@ -56,4 +57,18 @@
 
   </div>
 </section><!-- End Portfolio Section -->
+
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+<script>
+  const current = new Date();
+  current.setDate(current.getDate() + 1);
+  $( function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat: "yy-mm-dd",
+      minDate : 1
+    });
+    $( "#datepicker" ).datepicker("setDate", current);
+  });
+  </script>
 @endsection

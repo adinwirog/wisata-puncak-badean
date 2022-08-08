@@ -12,4 +12,8 @@ class Tiket extends Model
     public function tipeTiket() {
         return $this->belongsTo(TipeTiket::class);
     }
+
+    public function bookList() {
+        return $this->hasOne(BookList::class);
+    }
 }

@@ -5,7 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\TiketController;
 use App\Http\Controllers\TipeTiketController;
-
+use App\Http\Controllers\VisitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +59,7 @@ Route::resource('typeticket', TipeTiketController::class);
 //     return view('dashboard.productscreate');
 // });
 
+Route::resource('booking-tiket', VisitorController::class);
 
 Route::get('/verifikasitiket', function () {
     return view('dashboard.verifikasitiket');
