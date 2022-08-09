@@ -46,10 +46,15 @@ class VisitorController extends Controller
                     $query->where('id', $request->tipe_kendaraan);
                 })
                 ->get();
+
+        if($model->count() < 1) {
+            return redirect()->route('booking-tiket.index');
+        }
+        
         $bookList = new BookList();
         $randomPicking = rand(0, ($model->count()-1));
         if($visitor->count() < 1) {
-            dd($model);
+            // dd($model);
             $visitor = new Visitors();
             $visitor->email = $request->email;
             $visitor->save();

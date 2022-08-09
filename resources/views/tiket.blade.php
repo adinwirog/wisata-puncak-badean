@@ -2,7 +2,7 @@
 
 @section('contents')
   <!-- ======= Fasilitas Section ======= -->
-  <section id="fasilitas" class="fasilitas">
+  <section id="tiket" class="fasilitas">
   <div class="container mt-5" data-aos="fade-up">
 
     <div class="section-title">
@@ -23,7 +23,7 @@
       @csrf
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" data-bv-emailaddress-message="The value is not a valid email address" required>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     {{-- <div class="form-group">
@@ -39,7 +39,8 @@
 
         <div class="form-group col-md-6">
             <label for="tipe_kendaraan">Jenis Kendaraan</label>
-            <select id="tipe_kendaraan" name="tipe_kendaraan" class="form-control">
+            <select id="tipe_kendaraan" name="tipe_kendaraan" class="form-control" required>
+                <option selected disabled value="">Pilih Jenis Kendaraan...</option>
               @foreach ($tipetiket as $item)
                 <option value="{{ $item->id }}">{{ $item->tipe_kendaraan }}</option>
               @endforeach
@@ -70,5 +71,6 @@
     });
     $( "#datepicker" ).datepicker("setDate", current);
   });
+
   </script>
 @endsection
