@@ -7,6 +7,7 @@ use App\Http\Controllers\TiketController;
 use App\Http\Controllers\TipeTiketController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\VerifikasiController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,9 @@ Route::resource('verifikasitiket', VerifikasiController::class);
 //     return view('dashboard.verifikasitiket');
 // });
 
-Route::get('v', function () {
-    return view('dashboard.print');
-});
+// Route::get('v', function () {
+//     return view('dashboard.print');
+// });
+
+
+Route::resource('laporanpengunjung', LaporanController::class);
