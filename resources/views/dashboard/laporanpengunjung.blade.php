@@ -69,7 +69,7 @@
     
     const ctx = document.getElementById('chart-pengunjung').getContext('2d');
     const myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: data,
         options: {
             scales: {
