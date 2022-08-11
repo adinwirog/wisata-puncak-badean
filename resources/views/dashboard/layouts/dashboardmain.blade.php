@@ -28,7 +28,10 @@
   <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3 text-white" href="#">Sign out</a>
+      <form action="{{ route('logout') }}" method="get">
+        <button class="nav-link px-3 text-white btn btn-lg" type="submit">Sign out</button>
+      </form>
+      {{-- <a class="nav-link px-3 text-white" href="#">Sign out</a> --}}
     </div>
   </div>
 </header>

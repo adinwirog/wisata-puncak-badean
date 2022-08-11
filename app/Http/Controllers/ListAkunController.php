@@ -25,13 +25,13 @@ class ListAkunController extends Controller
             })->editColumn('updated_at', function ($data) {
                 return $data->updated_at;
             })->editColumn('is_admin', function ($data) {
-                $button = '<button type="button" class="delete btn btn-success btn-sm"> User</button>';
-                return $button;
+                $span = '<span class="badge rounded-pill bg-success">USER</span>';
+                return $span;
             })->addColumn('action', function($data){
-                $button .= '<button type="button" name="'.$data->title.'" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> Delete</button>';
+                $button = '<button type="button" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> Delete</button>';
                 return $button;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'is_admin'])
             ->addIndexColumn()
             ->make(true);
         }

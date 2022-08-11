@@ -9,6 +9,7 @@ use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ListAkunController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,47 +26,59 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/login', function () {
-    return view('auth.signin');
-});
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 
-Route::post('/login', function () {
-    return view('auth.signin');
-});
+Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');
 
 Route::get('/tiket', function () {
     return view('tiket');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
+Route::group(['middleware' => ['auth']], function() {
+    
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', function () {
+        return view('dashboard.index');
+    });
+
+    Route::resource('laporanpengunjung', LaporanController::class);
+
+    Route::resource('booking-tiket', VisitorController::class);
+    
+    Route::resource('verifikasitiket', VerifikasiController::class);
+
+    Route::resource('post', EventController::class);
+
+    Route::get('/postcreate', function () {
+        return view('dashboard.postcreate');
+    });
+
+    Route::get('/postedit', function () {
+        return view('dashboard.postedit');
+    });
+
+    Route::resource('products', ProductsController::class);
+
+    Route::resource('ticketting', TiketController::class);
+
+    Route::resource('typeticket', TipeTiketController::class);
+
+    Route::group(['middleware' => ['cekadmin']], function () {
+        Route::resource('listakun', ListAkunController::class);
+    });
 });
+
+
 
 // Route::get('/post', [EventController::class, 'index'])->name('dashboard.post');
-Route::resource('post', EventController::class);
 
-Route::get('/postcreate', function () {
-    return view('dashboard.postcreate');
-});
-
-Route::get('/postedit', function () {
-    return view('dashboard.postedit');
-});
-
-Route::resource('products', ProductsController::class);
-
-Route::resource('ticketting', TiketController::class);
-
-Route::resource('typeticket', TipeTiketController::class);
 
 // Route::get('/productscreate', function () {
 //     return view('dashboard.productscreate');
 // });
 
-Route::resource('booking-tiket', VisitorController::class);
 
-
-Route::resource('verifikasitiket', VerifikasiController::class);
 
 // Route::get('/verifikasitiket', function () {
 //     return view('dashboard.verifikasitiket');
@@ -76,6 +89,5 @@ Route::resource('verifikasitiket', VerifikasiController::class);
 // });
 
 
-Route::resource('laporanpengunjung', LaporanController::class);
 
-Route::resource('listakun', ListAkunController::class);
+
