@@ -8,6 +8,7 @@ use App\Http\Controllers\TipeTiketController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ListAkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +77,5 @@ Route::resource('verifikasitiket', VerifikasiController::class);
 
 
 Route::resource('laporanpengunjung', LaporanController::class);
+
+Route::resource('listakun', ListAkunController::class);
