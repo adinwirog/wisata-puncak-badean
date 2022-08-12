@@ -230,21 +230,22 @@
     </div>
 
     <div class="row">
-
+      @foreach ($events as $event)
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
         <div class="post-box">
           <div class="post-img"><img src="assets/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
           <div class="meta">
-            <span class="post-date">25 April 2022</span>
-            <span class="post-author"> / Rafly</span>
+            <span class="post-date">{{ $event->created_at->day }} {{ $event->created_at->locale('id')->monthName }} {{ $event->created_at->year }}</span>
+            <span class="post-author"> / {{ $event->user->name }}</span>
           </div>
-          <h3 class="post-title">Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit</h3>
-          <p>Illum voluptas ab enim placeat. Adipisci enim velit nulla. Vel omnis laudantium. Asperiores eum ipsa est officiis. Modi cupiditate exercitationem qui magni est...</p>
-          <a href="blog-details.html" class="readmore stretched-link"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
+          <h3 class="post-title">{{ $event->title }}</h3>
+          <p>{{ $event->contents }}</p>
+          <a href="#" class="readmore stretched-link"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
         </div>
       </div>
+      @endforeach
 
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+      {{-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
         <div class="post-box">
           <div class="post-img"><img src="assets/img/blog/blog-2.jpg" class="img-fluid" alt=""></div>
           <div class="meta">
@@ -268,7 +269,7 @@
           <p>Quia nam eaque omnis explicabo similique eum quaerat similique laboriosam. Quis omnis repellat sed quae consectetur magnam veritatis dicta nihil...</p>
           <a href="blog-details.html" class="readmore stretched-link"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
         </div>
-      </div>
+      </div> --}}
 
     </div>
 
@@ -277,7 +278,7 @@
 </section><!-- End kegiatan -->
 
 <!-- ======= Oleh-Oleh ======= -->
-<section id="product" class="product">
+{{-- <section id="product" class="product">
   <div class="container" data-aos="fade-up">
 
     <div class="section-title">
@@ -346,6 +347,6 @@
     </div>
 
   </div>
-</section><!-- End product Section -->
+</section><!-- End product Section --> --}}
 <!-- ======= End Oleh-Oleh ======= -->
 @endsection

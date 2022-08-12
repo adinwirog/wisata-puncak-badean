@@ -12,6 +12,7 @@ use App\Http\Controllers\ListAkunController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DetailAkunController;
 use App\Http\Controllers\ResetPwdAkunController;
+use App\Models\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,8 @@ use App\Http\Controllers\ResetPwdAkunController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $events = Event::with('user')->where('is_visible', true)->orderBy('updated_at', 'desc')->limit(3)->get();
+    return view('home', ['events' => $events]);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
