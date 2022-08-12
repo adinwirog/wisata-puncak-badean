@@ -84,11 +84,11 @@
           {data: 'file_name', name: 'file_name'},
           {data: 'title', name: 'title'},
           {data: 'contents', name: 'contents'},
-          {data: 'users', name: 'users.name', 'searchable': false},
+          {data: 'user.name', name: 'user.name'},
           {data: 'created_at', name: 'created_at'},
           {data: 'updated_at', name: 'updated_at'},
           {data: 'is_visible', name: 'is_visible'},
-          {data: 'action', name: 'action'},
+          {data: 'action', name: 'action', 'searchable': false},
       ],
       order: [[6, 'desc']],
       });

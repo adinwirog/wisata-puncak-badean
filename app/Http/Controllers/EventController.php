@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -17,11 +18,18 @@ class EventController extends Controller
     {
         if ($request->ajax()) {
 
-            $model = Event::with('users');
+            $model = Event::with('user')->get();
             return DataTables::of($model)->editColumn('is_visible', function(Event $event) {
                 $value = ($event->is_visible == 1) ? 'Tampil' : 'Belum Tampil' ;
                 return $value;
-            })->addColumn('action', function($data){
+            })
+            ->editColumn('is_visible', function($data) {
+                if(!$data->is_visible) {
+                    return '<span class="badge rounded-pill text-bg-warning">Belum Publish</span>';
+                }
+                return '<span class="badge rounded-pill text-bg-success">Sudah Tampil</span>';
+            })
+            ->addColumn('action', function($data){
                 $button = '<a href="'.route("post.edit", $data->id).'" data-toggle="tooltip"  '.' data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
                 $button .= '&nbsp;&nbsp;';
                 $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"> Delete</button>';
@@ -33,7 +41,7 @@ class EventController extends Controller
                 }
                 return $button;
             })
-            ->rawColumns(['action'])->make(true);
+            ->rawColumns(['action', 'is_visible'])->make(true);
         }
 
         return view('dashboard.post');
@@ -65,6 +73,7 @@ class EventController extends Controller
         $event = new Event();
         $event->title = $request->input('title');
         $event->contents = $request->input('contents');
+        $event->user()->associate(Auth::user());
         $event->save();
 
         $request->session()->flash('status', 'Event Post Berhasil Disimpan');
@@ -120,6 +129,7 @@ class EventController extends Controller
         $postevent = Event::find($id);
         $postevent->title = $request->input('title');
         $postevent->contents = $request->input('contents');
+        $postevent->user()->associate(Auth::user());
         $postevent->save();
 
         $request->session()->flash('status', 'Event Post Berhasil Diubah');

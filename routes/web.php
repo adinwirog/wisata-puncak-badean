@@ -10,6 +10,8 @@ use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ListAkunController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DetailAkunController;
+use App\Http\Controllers\ResetPwdAkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +59,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/postedit', function () {
         return view('dashboard.postedit');
     });
+
+    Route::resource('detailakun', DetailAkunController::class);
+
+    Route::resource('resetpassword', ResetPwdAkunController::class);
 
     Route::resource('products', ProductsController::class);
 
