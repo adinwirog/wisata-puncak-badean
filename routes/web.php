@@ -34,9 +34,13 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');
 
-Route::get('/tiket', function () {
-    return view('tiket');
-});
+Route::post('displaytiket', [VisitorController::class, 'display'])->name('display.tiket');
+
+Route::resource('booking-tiket', VisitorController::class);
+
+// Route::get('/tiket', function () {
+//     return view('tiket');
+// });
 
 Route::group(['middleware' => ['auth']], function() {
     
@@ -47,8 +51,6 @@ Route::group(['middleware' => ['auth']], function() {
     });
 
     Route::resource('laporanpengunjung', LaporanController::class);
-
-    Route::resource('booking-tiket', VisitorController::class);
     
     Route::resource('verifikasitiket', VerifikasiController::class);
 

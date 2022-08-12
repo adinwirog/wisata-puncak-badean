@@ -18,6 +18,9 @@ class VisitorController extends Controller
      */
     public function index()
     {
+        if(session()->has('ticket')) {
+            return view('tiketsuccess');
+        }
         return view('tiket', ['tipetiket' => TipeTiket::all()]);
     }
 
@@ -73,6 +76,7 @@ class VisitorController extends Controller
         }
 
         $bookList->save();
+        $request->session()->flash('ticket', $bookList->id);
         return redirect()->route('booking-tiket.index');
     }
 
@@ -84,7 +88,12 @@ class VisitorController extends Controller
      */
     public function show($id)
     {
-        //
+        
+    }
+
+    public function display(Request $request) {
+        $bookList = BookList::findOrFail($request->id);
+        return view('printingtiketvisitor', ['booklist' => $bookList]);
     }
 
     /**

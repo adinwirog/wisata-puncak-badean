@@ -275,7 +275,7 @@ a {
     <title>Document</title>
 </head>
 {{-- onload="window.print();" onfocus="window.close();" --}}
-<body onload="window.print();" onfocus="window.close();">
+<body onload="window.print();">
     <table class="body-wrap">
         <tbody>
            <tr>
@@ -291,7 +291,7 @@ a {
                                       <tr>
                                          <td class="content-block">
                                              <h1>Wisata Puncak Badean</h1>
-                                            <h2>Badean</h2>
+                                            <h2>Tiket Berhasil Terbit</h2>
                                          </td>
                                       </tr>
                                       <tr>
@@ -299,42 +299,31 @@ a {
                                             <table class="invoice">
                                                <tbody>
                                                   <tr>
-                                                     <td>Tanggal : jfskjfsk
-                                                         <br>Kasir ID: fssgsb <br>
-                                                         <br>Atas Pengunjung Dengan:
-                                                        </td>
-                                                  </tr>
-                                                  <tr>
                                                      <td>
                                                         <table class="invoice-items" cellpadding="0" cellspacing="0">
                                                            <tbody>
                                                               <tr>
                                                                  <td>Email</td>
-                                                                 <td class="alignright">{{ $request['email'] }}</td>
+                                                                 <td class="alignright">{{ $booklist->visitor->email }}</td>
                                                               </tr>
                                                               <tr>
                                                                  <td>Tipe Kendaraan</td>
-                                                                 <td class="alignright">{{ $request['tipe_kendaraan'] }}</td>
+                                                                 <td class="alignright">{{ $booklist->tiket->tipeTiket->tipe_kendaraan }}</td>
                                                               </tr>
                                                               <tr>
                                                                  <td>Tanggal Kadaluarsa</td>
-                                                                 <td class="alignright">{{ $request['due_date'] }}</td>
+                                                                 <td class="alignright">{{ $booklist->created_at }}</td>
                                                               </tr>
                                                               <tr>
                                                                 <td>Kode Tiket</td>
-                                                                <td class="alignright">{{ $request['unique_string'] }}</td>
+                                                                <td class="alignright">{{ $booklist->tiket->unique_string }}</td>
                                                              </tr>
                                                               <tr class="total">
                                                                  <td class="alignright" width="80%">Harga</td>
-                                                                 <td class="alignright">Rp. {{ $request['harga_tiket'] }}</td>
+                                                                 <td class="alignright">Rp. {{ $booklist->tiket->tipeTiket->harga_tiket }}</td>
                                                               </tr>
-                                                              <tr class="">
-                                                                <td class="alignright" width="80%"><strong> Cash Tunai </strong></td>
-                                                                <td class="alignright">Rp. {{ $request['bayar'] }}</td>
-                                                             </tr>
-                                                             <tr class="total">
-                                                                <td class="alignright" width="80%">Kembalian</td>
-                                                                <td class="alignright">Rp. {{ $request['kembalian'] }}</td>
+                                                              <tr class="total">
+                                                                <td class="aligncenter"><img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($booklist->tiket->unique_string, 'C128') }}" alt="barcode" /></td>
                                                              </tr>
                                                            </tbody>
                                                         </table>
